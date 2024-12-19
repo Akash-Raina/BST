@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import { SignInPage } from "./pages/SignInPage"
-import { SignUpPage } from "./pages/SignUpPage"
-import { Home } from "./pages/Home"
+import SignInPage from "./views/auth/SignIn"
+import SignUpPage from "./views/auth/SignUp"
+import Home  from "./views/home"
 function App() {
 
   return (
@@ -10,7 +10,6 @@ function App() {
         <Route path="/" element= {<Home/>}/>
         <Route path="/signin" element= {<SignInPage/>}/>
         <Route path="/signup" element= {<SignUpPage/>}/>
-
       </Routes>
     </Router>
   )

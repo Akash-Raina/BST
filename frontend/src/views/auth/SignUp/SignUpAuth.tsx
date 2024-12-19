@@ -1,5 +1,5 @@
-import { AuthForm, InitialDataType } from "./AuthForm"
-import { AuthHeader } from "./AuthHeader"
+import { AuthForm, InitialDataType } from "../AuthForm"
+import { AuthHeader } from "../Common/AuthHeader"
 
 
 export const SignUpAuth = ()=>{

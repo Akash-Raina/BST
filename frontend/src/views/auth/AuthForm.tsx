@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
-import { SignUpFields } from "./SignUpFields";
-import { AuthBottom } from "./AuthBottom";
-import { SignInFields } from "./SignInFields";
+import { SignUpFields } from "./SignUp/SignUpFields";
+import { AuthBottom } from "./Common/AuthBottom";
+import { SignInFields } from "./SignIn/SignInFields";
 
 export interface InitialDataType{
     email?: string
