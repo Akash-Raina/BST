@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import google from "../assets/google.png"
 
-export const    AuthBottom = ({type} : {type: 'signup' | 'signin'})=>{
+export const AuthBottom = ({type} : {type: 'signup' | 'signin'})=>{
 
     return <div className="font-montserrat flex flex-col justify-center items-center gap-3 ">
         <div className="mt-3">

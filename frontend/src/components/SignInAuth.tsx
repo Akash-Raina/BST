@@ -9,7 +9,7 @@ export const SignInAuth = ()=>{
     }
 
     const onSubmit = (values: InitialDataType)=>{
-        console.log(values)
+        console.log("SignIn values",values)
     }
 
     return <div className="h-screen flex justify-center items-center">

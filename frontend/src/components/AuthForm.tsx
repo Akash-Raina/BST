@@ -23,7 +23,7 @@ export const AuthForm = ({initialData, submitData, type}: AuthFormType)=>{
             onSubmit={submitData}
         >
             <Form className="flex flex-col items-center">
-                {type === "signup" ? <SignUpFields/>: <SignInFields/>}
+                {type === "signup" ? <SignUpFields/>: <SignInFields/>}              
                 <button 
                     type="submit" 
                     className=" w-[65%] h-9 rounded-xl bg-[#5446D0] mt-7 text-white font-semibold">

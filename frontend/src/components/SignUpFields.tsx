@@ -19,39 +19,39 @@ interface SignUpFieldType{
 export const SignUpFields = ()=>{
 
     return <div className="flex flex-col gap-5 w-full ">
-        <div className="flex gap-2 border-b pb-1">
+        <div className="flex gap-2 border-b border-zinc-500 pb-1">
             <label>
-                <img src={username} alt="username" className="w-8 h-8"/>
+                <img src={username} alt="username" className="w-7 h-7"/>
             </label>
             <Field
                 type="text"
                 name="username"
                 placeholder="Username"
-                className="outline-none"
+                className="outline-none bg-[#FFDAB9] placeholder-slate-500"
             />
         </div>
 
-        <div className="flex gap-2 border-b pb-1">
+        <div className="flex gap-2 border-b border-zinc-500 pb-1">
             <label>
-                <img src={email} alt="email" className="w-8 h-8"/>
+                <img src={email} alt="email" className="w-7 h-7"/>
             </label>
             <Field
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="outline-none"
+                className="outline-none bg-[#FFDAB9] placeholder-slate-500"
             />
         </div>
 
-        <div className="flex gap-2 border-b pb-1">
+        <div className="flex gap-2 border-b border-zinc-500 pb-1">
             <label>
-                <img src={key} alt="email" className="w-8 h-8"/>
+                <img src={key} alt="email" className="w-7 h-7"/>
             </label>
             <Field
                 type="password"
                 name="password"
                 placeholder="******"
-                className="outline-none"
+                className="outline-none bg-[#FFDAB9] placeholder-slate-500"
             />
         </div>
 

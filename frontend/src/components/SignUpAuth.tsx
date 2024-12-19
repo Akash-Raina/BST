@@ -11,7 +11,7 @@ export const SignUpAuth = ()=>{
     }
 
     const onSubmit = (values : InitialDataType)=>{
-        console.log(values)
+        console.log("values",values)
     }
 
     return <div className="h-screen flex justify-center items-center">
