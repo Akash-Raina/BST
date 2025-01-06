@@ -1,4 +1,4 @@
-import logo from "../assets/pan.png"
+import logo from "../../assets/pan.png"
 import { Link } from "react-router-dom"
 export const AuthHeader = ({type}: {type: string})=>{
 

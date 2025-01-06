@@ -1,6 +1,6 @@
 import { Field } from "formik"
-import username from "../assets/logo.png"
-import key from "../assets/key.png"
+import username from "../../assets/logo.png"
+import key from "../../assets/key.png"
 import { Link } from "react-router-dom"
 
 
@@ -31,14 +31,7 @@ export const SignInFields = ()=>{
             />
         </div>
 
-        <div className="flex gap-3 justify-around text-slate-500 font-small text-sm">
-            <div className="flex gap-1">
-                <Field
-                    type="checkbox"
-                />
-                <label>Remember Me</label>
-            </div>
-            
+        <div className="flex justify-end text-slate-500 font-small text-sm">
             <Link to="" className="hover:text-[#5446D0]">Forgot Password?</Link>
         </div>
 

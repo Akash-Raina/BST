@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import jonathan from "../assets/cover1.jpg"
-import rony from "../assets/cover2.jpg"
-import aaru from "../assets/cover3.jpg"
-import owais from "../assets/cover4.png"
+import jonathan from "../../assets/cover1.jpg"
+import rony from "../../assets/cover2.jpg"
+import aaru from "../../assets/cover3.jpg"
+import owais from "../../assets/cover4.png"
 
 const images = [
   {

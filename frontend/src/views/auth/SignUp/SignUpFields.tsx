@@ -1,7 +1,7 @@
 import { Field, FormikErrors, FormikTouched } from "formik"
-import username from "../assets/logo.png"
-import email from "../assets/email.png"
-import key from "../assets/key.png"
+import username from "../../assets/logo.png"
+import email from "../../assets/email.png"
+import key from "../../assets/key.png"
 
 interface FormFieldsName{
     username: string

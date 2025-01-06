@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import google from "../assets/google.png"
+import google from "../../assets/google.png"
 
 export const AuthBottom = ({type} : {type: 'signup' | 'signin'})=>{
 
@@ -9,13 +9,13 @@ export const AuthBottom = ({type} : {type: 'signup' | 'signin'})=>{
         </div>
         <div className="flex flex-col items-center justify-center w-[80%]">
             <div className="flex items-center w-full gap-3">
-                <div className="flex-1 border-t border-gray-300"></div>
-                <span className="text-sm text-gray-500">Or</span>
-                <div className="flex-1 border-t border-gray-300"></div>
+                <div className="flex-1 border-t border-gray-600"></div>
+                <span className="text-sm text-gray-700">Or</span>
+                <div className="flex-1 border-t border-gray-600"></div>
             </div>
 
             <span className="text-xs mt-5 font-medium">With your social network</span>
-            <div className="h-10 w-10 rounded-full bg-slate-200 flex justify-center items-center mt-2">
+            <div className="h-10 w-10 rounded-full bg-slate-100 flex justify-center items-center mt-2">
                 <img src={google} alt="signin" className="h-5 w-5 cursor-pointer" />
             </div>
         </div>

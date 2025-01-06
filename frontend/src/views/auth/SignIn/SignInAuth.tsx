@@ -1,3 +1,4 @@
+import { apiSignIn } from "../../../services/authService"
 import { AuthForm, InitialDataType } from "../AuthForm"
 import { AuthHeader } from "../Common/AuthHeader"
 
@@ -8,8 +9,9 @@ export const SignInAuth = ()=>{
         password: ''
     }
 
-    const onSubmit = (values: InitialDataType)=>{
-        console.log("SignIn values",values)
+    const onSubmit = async(values: InitialDataType)=>{
+        const data = values;
+        await apiSignIn(data);
     }
 
     return <div className="h-screen flex justify-center items-center">

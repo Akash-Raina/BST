@@ -1,3 +1,5 @@
+
+import { apiSignUp } from "../../../services/authService"
 import { AuthForm, InitialDataType } from "../AuthForm"
 import { AuthHeader } from "../Common/AuthHeader"
 
@@ -10,8 +12,9 @@ export const SignUpAuth = ()=>{
         email:''
     }
 
-    const onSubmit = (values : InitialDataType)=>{
-        console.log("values",values)
+    const onSubmit = async(values : InitialDataType)=>{
+        const data = values;
+        await apiSignUp(data)
     }
 
     return <div className="h-screen flex justify-center items-center">
