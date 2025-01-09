@@ -1,4 +1,4 @@
-import {signupWithEmail, logininWithEmail} from "../services/user.service";
+import {signupWithEmail, logininWithEmail, getTeams} from "../services/user.service";
 import { Request, Response } from "express";
 
 async function createUser(req: Request, res: Response){
@@ -36,7 +36,25 @@ async function checkUser(req: Request, res: Response){
     }
 }
 
+async function getTeamsRank(req: Request, res: Response){
+    try{
+        const {rankingData, size, index} = await getTeams(req);
+        res.status(200).json({
+            rankingData,
+            pageSize: size,
+            pageIndex: index
+        })
+    }
+    catch(err:unknown){
+        if(err instanceof Error)
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export {
     createUser,
-    checkUser
+    checkUser,
+    getTeamsRank
 };

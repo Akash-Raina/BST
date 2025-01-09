@@ -9,7 +9,7 @@ const Ranking = ()=>{
                 BGMI Team Ranking
             </span>
             <div>
-
+   
             </div>
         </div>
     </div>

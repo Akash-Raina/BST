@@ -6,7 +6,7 @@ async function rankingFile(req: Request, res: Response){
     await getRankingFile(req);
 
     res.status(200).json({
-        msg: 'file'
+        msg: 'File Uploaded Successfully'
     })
 }
 
