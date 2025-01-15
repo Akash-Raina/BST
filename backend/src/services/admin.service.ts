@@ -2,6 +2,7 @@ import { Request } from "express";
 import formidable, { Fields, Files } from "formidable"
 import xlsx from "xlsx"
 import pool from "../models/dbConnection";
+import { validAdmin } from "../middleware/auth";
 
 async function getRankingFile(req: Request){
 
@@ -52,4 +53,27 @@ async function getRankingFile(req: Request){
 
 }
 
-export {getRankingFile};
+async function createEvent(req: Request){
+
+    if(!req.body) throw new Error;
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    const adminId = await validAdmin(token);
+    console.log('adminId', adminId);
+    const {event_name, status, prize_pool, date, location, description} = req.body;
+    try{
+        await pool.query(
+            `INSERT INTO events (name, date, location, description, status, prize_pool, created_by)
+                VALUES
+                (?, ?, ?, ?, ?, ?, ?)`,
+            [event_name, date, location, description, status, prize_pool, adminId]
+        );
+    }
+    catch(err){
+        throw new Error("Error came while inserting in DB")
+    }
+}
+
+export {getRankingFile, createEvent};

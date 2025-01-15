@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/signup', createUser);
 router.post('/signin', checkUser);
-router.get('/teamranking', getTeamsRank)
+router.get('/teamranking', getTeamsRank);
+
 
 export default router;

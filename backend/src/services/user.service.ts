@@ -25,11 +25,11 @@ async function logininWithEmail(req: Request){
     const email = req.body.email;
     const simplePassword = req.body.password;
     const [user] = await pool.query<RowDataPacket[]>(`
-        SELECT password FROM user WHERE email = ?
+        SELECT password, id FROM user WHERE email = ?
     `, [email])
 
     if(user[0] == undefined) throw new Error("Wrong Email")
-    const token = loginUser(email, simplePassword, user[0])
+    const token = loginUser(simplePassword, user[0])
     return token;
 }
 
