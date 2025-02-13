@@ -51,6 +51,10 @@ async function getTeamsRank(req: Request, res: Response){
             error: err.message
         })
     }
+} 
+
+async function createNewTeam(req: Request, res: Response){
+
 }
 
 export {
