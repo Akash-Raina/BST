@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Admin = ()=>{
 
@@ -38,6 +39,8 @@ const Admin = ()=>{
         }
     };
 
+    const navigate = useNavigate();
+
 
     return <div className="w-full h-screen bg-black flex items-center flex-col">
         <span className="text-white text-3xl mt-2 font-montserrat font-bold">Admin Panel</span>
@@ -46,6 +49,10 @@ const Admin = ()=>{
             <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} className=" w-28 cursor-pointer" />
             {fileIs ? <AiOutlineFileDone size={20} color="skyblue"/>: ""}
             <button onClick={handleFile} className="text-slate-700 font-semibold bg-slate-300 rounded-xl w-44 h-9">Upload to Backend</button>
+        </div>
+        <div className="w-full flex mt-5 text-lg gap-2 items-center">
+            <span className="text-white">Create New Team</span>
+            <button onClick={()=>navigate('/admin/createteam')} className="text-slate-700 font-semibold bg-slate-300 rounded-xl w-32 h-9">Add</button>
         </div>
     </div>
 }

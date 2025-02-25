@@ -77,83 +77,46 @@ async function createEvent(req: Request){
     }
 }
 
-async function createTeam(req: Request){
+async function createTeam(req: Request) {
+    const { team_name, coach, manager, organization, players } = req.body;
 
-    const form = formidable({ multiples: true});
+    if (!team_name) throw new Error("Team name is required");
+    if (!Array.isArray(players) || players.length === 0) throw new Error("At least one player is required");
 
-    form.parse(req, async (err: Error | null, fields: Fields, files: Files) =>{
-        if (err) {
-            console.log("Error parsing form:", err);
-            throw new Error("Error parsing form data");
-        }
+    const connection = await pool.getConnection();
+    console.log("Connected to DB");
 
-        const { team_name, coach, manager, organization } = fields;
+    try {
+        await connection.beginTransaction();
 
-        console.log("team_name : ", typeof(team_name), "->", team_name)
-        
-        if (!team_name) {
-            throw new Error("Team name is really required" );
-        }
+        const [teamResult]: any = await connection.execute<RowDataPacket[]>(
+            `INSERT INTO teams (team_name, coach, manager, organization) VALUES (?, ?, ?, ?)`,
+            [team_name, coach || null, manager || null, organization || null]
+        );
+        const team_id = teamResult.insertId;
 
-        const connection= await pool.getConnection();
-
-        try{
-            await connection.beginTransaction();
-
-            const [teamResult]:any = await connection.execute<RowDataPacket[]>(
-                `INSERT INTO teams (team_name, coach, manager, organization) VALUES (?, ?, ?, ?)`,
-                    [team_name, coach || null, manager || null, organization || null]
-            );
-            console.log("teamResult", teamResult.insertId);
-            const team_id = teamResult.insertId;
-            console.log("players", typeof(fields.players))
-            if(typeof fields.players === 'string'){
-                console.log("isString");
-                const players = JSON.parse(fields.players);
-
-                if (!Array.isArray(players) || players.length === 0) {
-                    throw new Error("At least one player is required" );
-                }
-
-                for (const player of players) {
-                    const { player_name, in_game_name, role, country} = player;
-
-                    await connection.execute(
-                        `INSERT INTO players (team_id, player_name, role, country, email) VALUES (?, ?, ?, ?, ?)`,
-                        [team_id, player_name, in_game_name, role, country]
-                    );
-                }
-
-                // if (files.player_images) {
-                //     const images = Array.isArray(files.player_images) ? files.player_images : [files.player_images];
-
-                //     for (const imageFile of images) {
-                //         const imageUrl = await uploadToS3(imageFile.filepath); // Upload and get URL
-
-                //         await connection.execute(
-                //             `UPDATE players SET profile_image_url = ? WHERE team_id = ? AND player_name = ?`,
-                //             [imageUrl, team_id, imageFile.originalFilename?.split(".")[0] || "unknown"]
-                //         );
-                //     }
-                // }
-
-                await connection.commit(); 
+        const playerValues = players.map(({ player_name, in_game_name, role, country }) => {
+            if (!player_name || !in_game_name || !role || !country) {
+                throw new Error("All player fields are required");
             }
-            else{
-               throw new Error("Invalid players data format" );
-            }
+            return [team_id, player_name, in_game_name, role, country];
+        });
 
+        await connection.query(
+            `INSERT INTO players (team_id, player_name, in_game_name, role, country) VALUES ?`,
+            [playerValues]
+        );
 
-        }catch (dbError) {
-            if (connection) await connection.rollback();
-            console.error("Database Error:", dbError);
-            throw new Error ("Database error");
-        } finally {
-            if (connection) connection.release();
-        }
-    });
-    
-} 
+        await connection.commit();
+    } catch (dbError) {
+        await connection.rollback();
+        console.error("Database Error:", dbError);
+        throw dbError;
+    } finally {
+        connection.release();
+    }
+}
+
 
 export {
     getRankingFile,

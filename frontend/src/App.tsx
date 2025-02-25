@@ -4,6 +4,7 @@ import SignUpPage from "./views/auth/SignUp"
 import Home  from "./views/home"
 import Ranking from "./views/ranking"
 import Admin from "./views/admin"
+import CreateTeam  from "./views/admin/components/CreateTeam"
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element= {<SignUpPage/>}/>
         <Route path="/ranking" element={<Ranking/>}/>
         <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin/createteam" element={<CreateTeam/>}/>
       </Routes>
     </Router>
   )
