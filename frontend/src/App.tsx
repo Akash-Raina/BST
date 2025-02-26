@@ -5,6 +5,7 @@ import Home  from "./views/home"
 import Ranking from "./views/ranking"
 import Admin from "./views/admin"
 import CreateTeam  from "./views/admin/components/CreateTeam"
+import { CreateEvent } from "./views/admin/components/CreateEvent"
 function App() {
 
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/ranking" element={<Ranking/>}/>
         <Route path="/admin" element={<Admin/>}/>
         <Route path="/admin/createteam" element={<CreateTeam/>}/>
+        <Route path="/admin/createevent" element={<CreateEvent/>}/>
       </Routes>
     </Router>
   )

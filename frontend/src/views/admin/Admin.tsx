@@ -54,6 +54,10 @@ const Admin = ()=>{
             <span className="text-white">Create New Team</span>
             <button onClick={()=>navigate('/admin/createteam')} className="text-slate-700 font-semibold bg-slate-300 rounded-xl w-32 h-9">Add</button>
         </div>
+        <div className="w-full flex mt-5 text-lg gap-2 items-center">
+            <span className="text-white">Create New Event</span>
+            <button onClick={()=>navigate('/admin/createevent')} className="text-slate-700 font-semibold bg-slate-300 rounded-xl w-32 h-9">Add</button>
+        </div>
     </div>
 }
 

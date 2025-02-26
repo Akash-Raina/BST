@@ -1,10 +1,12 @@
 import express from "express"
-import { createEventApi, createTeamApi, rankingFile } from "../controller/admin.controller";
+import { createEventApi, createTeamApi, getAllEventsApi, rankingFile, updateEventApi } from "../controller/admin.controller";
 
 const router = express.Router();
 
 router.post('/uploadranking', rankingFile);
 router.post('/createevent', createEventApi);
+router.get('/allevents', getAllEventsApi);
+router.post('/updateevent', updateEventApi)
 router.post('/createteam', createTeamApi);
 
 export default router;

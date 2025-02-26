@@ -77,7 +77,35 @@ async function createEvent(req: Request){
     }
 }
 
+async function getAllEvents(req: Request){
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
+    const allEvents = await pool.query(
+        `SELECT id, name, date, location, status, prize_pool, logo FROM events`
+    )
+
+    return allEvents[0];
+}
+
+async function updateEvent(req: Request){
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
+    const {id} = req.body 
+}
+
 async function createTeam(req: Request) {
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
     const { team_name, coach, manager, organization, players } = req.body;
 
     if (!team_name) throw new Error("Team name is required");
@@ -121,5 +149,7 @@ async function createTeam(req: Request) {
 export {
     getRankingFile,
     createEvent, 
+    getAllEvents,
+    updateEvent,
     createTeam,
     };
