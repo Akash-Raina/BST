@@ -145,6 +145,46 @@ async function createTeam(req: Request) {
     }
 }
 
+async function createStage(req: Request){
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
+    const {event_id,stage_name, total_teams, total_groups} = req.body;
+
+    if(!event_id || !stage_name || !total_teams || !total_groups){
+        throw new Error('No Required JSON found')
+    }
+
+    await pool.query(
+        `INSERT INTO stages (event_id, stage_name, total_teams, total_groups) VALUES ?`,
+        [event_id, stage_name, total_teams, total_groups]
+    )
+}
+
+async function createStageGroups(req: Request){
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
+    const {stage_id,group_name, total_teams} = req.body;
+
+    if(!stage_id || !group_name || !total_teams){
+        throw new Error('No Required JSON found')
+    }
+
+    await pool.query(
+        `INSERT INTO stages (event_id, stage_name, total_teams, total_groups) VALUES ?`,
+        [stage_id, group_name, total_teams, group_name]
+    )
+}
+
+
+
 
 export {
     getRankingFile,
@@ -152,4 +192,5 @@ export {
     getAllEvents,
     updateEvent,
     createTeam,
+    createStage
     };

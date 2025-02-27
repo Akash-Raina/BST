@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createEvent, createTeam, getAllEvents, getRankingFile, updateEvent } from "../services/admin.service";
+import { createEvent, createStage, createTeam, getAllEvents, getRankingFile, updateEvent } from "../services/admin.service";
 
 async function rankingFile(req: Request, res: Response){
 
@@ -84,10 +84,27 @@ async function createTeamApi(req: Request, res: Response){
     }
 }
 
+async function createStageApi(req: Request, res: Response){
+    try{
+        await createStage(req);
+        res.status(200).json({
+            msg: 'Stage Created Successfully'
+        })
+    }
+    catch(error:unknown){
+        if(error instanceof Error){
+            res.status(500).json({
+                msg: error.message
+            })
+        }
+    }
+}
+
 export {
     rankingFile, 
     createEventApi,
     getAllEventsApi,
     updateEventApi,
-    createTeamApi
+    createTeamApi,
+    createStageApi
 };
