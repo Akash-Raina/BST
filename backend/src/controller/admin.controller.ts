@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createEvent, createStage, createTeam, getAllEvents, getRankingFile, updateEvent } from "../services/admin.service";
+import { createEvent, createEventTeams, createStage, createTeam, eventQualifiedTeams, getAllEvents, getRankingFile, updateEvent } from "../services/admin.service";
 
 async function rankingFile(req: Request, res: Response){
 
@@ -100,11 +100,45 @@ async function createStageApi(req: Request, res: Response){
     }
 }
 
+async function createEventTeamsApi(req:Request, res: Response){
+    try{
+        await createEventTeams(req);
+        res.status(200).json({
+            msg: 'Teams Created Successfully'
+        })
+    }
+    catch(error:unknown){
+        if(error instanceof Error){
+            res.status(500).json({
+                msg: error.message
+            })
+        }
+    }
+}
+
+async function eventQualifiedTeamsApi(req: Request, res: Response){
+    try{
+        await eventQualifiedTeams(req);
+        res.status(200).json({
+            msg: 'Qualified Teams Created Successfully'
+        })
+    }
+    catch(error:unknown){
+        if(error instanceof Error){
+            res.status(500).json({
+                msg: error.message
+            })
+        }
+    }
+}
+
 export {
     rankingFile, 
     createEventApi,
     getAllEventsApi,
     updateEventApi,
     createTeamApi,
-    createStageApi
+    createStageApi,
+    createEventTeamsApi,
+    eventQualifiedTeamsApi
 };

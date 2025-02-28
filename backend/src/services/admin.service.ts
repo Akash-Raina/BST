@@ -183,8 +183,39 @@ async function createStageGroups(req: Request){
     )
 }
 
+async function createEventTeams(req: Request){
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
 
+    const {event_id, team_id} = req.body;
 
+    if(!event_id || !team_id){
+        throw new Error('No Required JSON found')
+    }
+    await pool.query(
+        `INSERT INTO stages (event_id, team_id) VALUES ?`,
+        [event_id, team_id]
+    )
+}
+
+async function eventQualifiedTeams(req: Request){
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Unauthorized');
+    
+    await validAdmin(token);
+
+    const {stage_id, team_id} = req.body;
+
+    if(!stage_id || !team_id){
+        throw new Error('No Required JSON found')
+    }
+    await pool.query(
+        `INSERT INTO stages (stage_id, team_id) VALUES ?`,
+        [stage_id, team_id]
+    )
+}
 
 export {
     getRankingFile,
@@ -192,5 +223,7 @@ export {
     getAllEvents,
     updateEvent,
     createTeam,
-    createStage
+    createStage,
+    createEventTeams,
+    eventQualifiedTeams
     };
